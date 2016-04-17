@@ -1,0 +1,111 @@
+{% extends "templates/base.html" %}
+{% block maincontent %}
+<div class='jumbotron topcolor'></div>
+<div class='jumbotron results'>
+	<div class='col-md-10 col-md-offset-1'>
+		<div class="row" style="margin-top:0px;margin-bottom:20px;">
+			<div class="col-md-10 col-md-offset-1 visible-lg text-center">
+				<h1 class='sheen' style='position:relative;font-size:70px;margin-top:90px;margin-bottom:0px;'><b><span></span>{{ place.name }}</b></h1>
+			</div>
+			<div class="col-md-10 col-md-offset-1 visible-md text-center">
+				<h1 class='sheen'  style='position:relative;font-size:65px;margin-top:45px;margin-bottom:20px;'><b><span></span>{{ place.name }}</b></h1>
+			</div>
+			<div class="col-sm-8 col-sm-offset-2 visible-sm text-center">
+				<h1 class='sheen'  style='font-size:48px;margin-top:45px;margin-bottom:20px;'><b><span></span>{{ place.name }}</b></h1>
+			</div>
+			<div class="col-xs-12 visible-xs text-center">
+				<h1 class='sheen'  style='font-size:34px;margin-top:30px;margin-bottom:0px;'><b><span></span>{{ place.name }}</b></h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
+				<p class='text-center' style="margin-bottom:20px;">
+					{{place.address}}<br>
+					{% if place.phone_number %}
+					{{place.phone_number}}
+					{% endif %}
+					{% if place.phone_number and place.price != "N/A" %} - {% endif %}
+					{% if place.price != "N/A" %}
+					{{place.price}}
+					{% endif %}
+					{% if place.website %}
+					<br><a href="{{place.website}}">{{place.website}}</a>
+					{% endif %}
+				</p>
+			</div>
+		</div>
+		<div class="row">
+			<table class = "table table-bordered" style="background-color: rgba(0,0,0,0.6);">
+				<tr>
+					<td colspan = "7"><center><b>STORE HOURS</b></center></td>
+				</tr>
+				<tr>
+					<td colspan = "1"><center>Sunday</center></td>
+					<td colspan = "1"><center>Monday</center></td>
+					<td colspan = "1"><center>Tuesday</center></td>
+					<td colspan = "1"><center>Wednesday</center></td>
+					<td colspan = "1"><center>Thursday</center></td>
+					<td colspan = "1"><center>Friday</center></td>
+					<td colspan = "1"><center>Saturday</center></td>
+				</tr>
+				<tr>
+					<td colspan = "1"><center>{{place.store_hours.get('0')}}</center></td>
+					<td colspan = "1"><center>{{place.store_hours.get('1')}}</center></td>
+					<td colspan = "1"><center>{{place.store_hours.get('2')}}</center></td>
+					<td colspan = "1"><center>{{place.store_hours.get('3')}}</center></td>
+					<td colspan = "1"><center>{{place.store_hours.get('4')}}</center></td>
+					<td colspan = "1"><center>{{place.store_hours.get('5')}}</center></td>
+					<td colspan = "1"><center>{{place.store_hours.get('6')}}</center></td>
+				</tr>
+			</table>
+		</div>
+		<div class="row">
+			<table class = "table table-bordered" style="background-color: rgba(0,0,0,0.6);">
+				<tr>
+					<td colspan = "4"><center><b>REVIEWS</b></center></td>
+				</tr>
+				<tr>
+					<td colspan = "1"><center>Rating</center></td>
+					<td colspan = "1"><center>Author</center></td>
+					<td colspan = "1"><center>Time</center></td>
+					<td colspan = "1"><center>Description</center></td>
+				</tr>
+				{% for review in place.reviews %}
+				<tr>
+					<td colspan = "1">{{review.get('rating')}}</td>
+					<td colspan = "1">{{review.get('author')}}</td>
+					<td colspan = "1">{{review.get('time')}}</td>
+					<td colspan = "1">{{review.get('description')}}</td>
+				</tr>
+				{% endfor %}
+				{% if not place.reviews %}
+				<tr>
+					<td colspan = "1"><center>N/A</center></td>
+					<td colspan = "1"><center>N/A</center></td>
+					<td colspan = "1"><center>N/A</center></td>
+					<td colspan = "1"><center>N/A</center></td>
+				</tr>
+				{% endif %}
+			</table>
+		</div>
+		<ul class="rig columns-3">
+		{% for photo in photos %}
+			<img class="img-zoom" width="400" height="200" src="{{photo}}">
+		{% endfor %}
+		</ul>
+
+	</div>
+</div>
+{% endblock %}
+{% block addscripts %}
+<script>
+  $(document).ready(function(){
+    $('.img-zoom').hover(function() {
+        $(this).addClass('transition');
+
+    }, function() {
+        $(this).removeClass('transition');
+    });
+  });
+</script>
+{% endblock addscripts %}

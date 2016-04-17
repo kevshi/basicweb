@@ -1,0 +1,39 @@
+{% extends "templates/base.html" %}
+{% block maincontent %}
+<div class='jumbotron topcolor' >
+	<div class='row'>
+		<div class='col-md-10 col-md-offset-1'>
+			<div class="row" style="margin-top:0px;margin-bottom:20px;">
+				<div class="col-md-10 col-md-offset-1 visible-lg text-center">
+					<h1 class='sheen' style='position:relative;font-size:70px;margin-top:90px;margin-bottom:0px;'><b><span></span>Fresh Eats</b></h1>
+				</div>
+				<div class="col-md-10 col-md-offset-1 visible-md text-center">
+					<h1 class='sheen'  style='position:relative;font-size:65px;margin-top:45px;margin-bottom:20px;'><b><span></span>Fresh Eats</b></h1>
+				</div>
+				<div class="col-sm-8 col-sm-offset-2 visible-sm text-center">
+					<h1 class='sheen'  style='font-size:48px;margin-top:45px;margin-bottom:20px;'><b><span></span>Fresh Eats</b></h1>
+				</div>
+				<div class="col-xs-12 visible-xs text-center">
+					<h1 class='sheen'  style='font-size:34px;margin-top:30px;margin-bottom:0px;'><b><span></span>Fresh Eats</b></h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
+				<p class='text-center' style="margin-bottom:20px;">Let's get something good to eat.</p>
+				</div>
+			</div>
+			<div class="row">
+				<form accept-charset='UTF-8' action="/results" method="post" autocomplete="off" class="submitlocation">
+					<div class="col-md-offset-2 col-md-4">
+						<input type="text" g-places-autocomplete ng-model="myScopeVar" class="form-control" placeholder="Where are you?" name="location">
+					</div>
+					<div class="eatbutton col-md-3">
+						<input type="text" class="form-control" placeholder="What would you like to eat?" name="query">
+					</div>
+					<button type="submit" class="btn btn-success" id="locationsubmit">Submit</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

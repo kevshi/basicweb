@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-Frame-Options" content="deny">
+    <title>Fresh Eats{% block title %}{% endblock title %}</title>
+    <link href="/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+	<link href="/css/bootstrap-form-helpers.min.css" rel="stylesheet">
+	<link href="/css/bootstrapValidator.min.css" rel="stylesheet">
+	<link href="/css/fontello.css" type="text/css" rel="stylesheet">
+	<link href="/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+	<link href="/css/style.css" type="text/css" rel="stylesheet">
+	<link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+	<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+<div id="loading">
+    <span style="margin-left:40%"><h3>Loading...</h3></span>
+</div>
+<div class="javascriptvalidationcontainer">
+	<div class="footerwrapper">
+    <nav class="navbar-default" role="navigation" style="border-top-width: 5px;">
+		<div class="container" style="padding-top:5px">
+      <div class="container-fluid">
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a class="btn" href="/">HOME</a></li>
+			<li><a class="btn" href="/product">PRODUCT</a></li>
+            <li><a class="btn" href="/about">ABOUT</a></li>
+
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+              			<li><a class="btn" href="#contact" data-toggle="modal">CONTACT US</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </div>
+	</nav>
+	
+        {% block maincontent %}
+	    {% endblock maincontent %}
+
+        <!-- Modal example -->
+<div class="modal fade" id="contact" tabindex="-1" role="dialog" aria-labelledby="contact" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content custom-roundcorners">
+      <div class="modal-body custom-FreshEatsBlue">
+          <form accept-charset='UTF-8' action="/contact/send" method="post" class="contactForm">
+              <div class="form-group">
+			<label for='contactname' class="control-label" >Name</label>
+            <input type="text" id="contactname" class="form-control" placeholder="Full Name" name="name">
+            </div>
+            <div class="form-group">
+                            <label for='contactemail' class="control-label">Email</label>
+                <input type="email" id="contactemail" class="form-control" placeholder="you@example.com" name="email">
+            </div>
+
+            <div class="form-group">
+                            <label for='contactmessage' class="control-label">Message</label>
+                <textarea id="contactmessage" class="form-control" rows="7" name="message"></textarea>
+            </div>
+            {% if recaptcha_javascript %}
+               <div class="row">
+                   <div class="col-md-10 col-md-offset-1">
+                 {{recaptcha_javascript | safe}}
+                    </div>
+                </div>
+            {% endif %}
+            <input type="hidden" id="botemail" name="botemail" />
+            <input type="hidden" id="botemailtime" name="botemailtime" value="{{botcurtime}}" />
+            <div class="text-center">
+                <button type="submit" id="sendnewcontact" class="btn-primary btn  btn-block btn">Send</button>
+                <button type="button" class="btn-default btn btn-block btn" data-dismiss="modal">Close</button>
+             </div>
+              </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Modal Contact Us -->
+		<div class="modal fade" id="contactconfirm" tabindex="-1" role="dialog" aria-labelledby="contactconfirm-0" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content custom-roundcorners">
+                        <div class="modal-body custom-FreshEatsBlue">
+                   <div class="form-group">
+            <div class="row">
+             <div class="col-md-9">
+               <h4>Contact Form Submission</h4>
+             </div>
+
+                </div>
+             </div>
+                 <div class="form-group">
+            <div class="row">
+                    <p class="text-center" id="contactresponse"></p>
+                 </div>
+             </div>
+
+                             <div class="text-center">
+                <button type="button" class="btn-default btn-lg btn-block btn" data-dismiss="modal">Close</button>
+                        </div>
+
+                        </div>
+
+					</div>
+				</div>
+		</div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/js/bootstrap.min.js"></script>
+	<!-- Bootstrap Form Helpers -->
+	<script src="/js/bootstrap-formhelpers.js"></script>
+    <script language="javascript" type="text/javascript">
+      $(window).load(function() {
+        $('#loading').hide();
+      });
+        window.onbeforeunload = function () { $('#loading').show(); }
+    </script>
+    {% block addscripts %}
+
+    {% endblock addscripts %}
+</div>
+<!-- <![endif]-->
+</body>
+</html>

@@ -1,0 +1,48 @@
+{% extends "templates/base.html" %}
+{% block maincontent %}
+<div class='jumbotron topcolor'></div>
+<div class='jumbotron row results'>
+	<div class='col-md-10 col-md-offset-1'>
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
+			<p class='text-center' style="margin-bottom:20px;">Showing results for '{{query}}' near '{{location}}' :</p>
+			</div>
+		</div>
+		<div class="row">
+			<table class = "table table-bordered" style="background-color: rgba(0,0,0,0.6);">
+				<tr>
+					<td><b>{{column_one_title}}</b></td>
+					<td><b>PRICE</b></td>
+					<td><b>RATING</b></td>
+					<td><b>PHONE NUMBER</b></td>
+					<td><b>STREET ADDRESS</b></td>
+				</tr>
+				{% for place in places %}
+				<tr>
+					<td><a href = "/place?id={{place.id}}">{{place.name}}</a></td>
+					<td>{{place.price}}</td>
+					{% if place.rating %}
+					<td>{{place.rating}}</td>
+					{% else %}
+					<td>N/A</td>
+					{% endif %}
+					{% if place.phone_number %}
+					<td>{{place.phone_number}}</td>
+					{% else %}
+					<td>N/A</td>
+					{% endif %}
+					{% if not place.address %}
+					<td>N/A</td>
+					{% else %}
+					<td>{{place.address}}</a></td>
+					{% endif %}
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+{% block addscripts %}
+{% endblock addscripts %}
